@@ -76,6 +76,7 @@
             this.Savetxtbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.Savetxtbox.Size = new System.Drawing.Size(281, 275);
             this.Savetxtbox.TabIndex = 3;
+            this.Savetxtbox.WordWrap = false;
             // 
             // FilesListbox
             // 

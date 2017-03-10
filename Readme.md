@@ -1,6 +1,8 @@
 # P社翻译文件YML合并器（钢铁雄心4、群星）
 # Paradox Interactive YML Merger
 
+Github：[[https://github.com/inkitter/pdx-ymlmerger]]
+
 ### 准备
 
 0. 需要安装.NET Framework 4.5。
