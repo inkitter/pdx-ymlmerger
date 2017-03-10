@@ -28,6 +28,7 @@ namespace pdx_ymlmerger
                 FilesListbox.Items.Add(Path.GetFileName(str));
             }
             FilesListbox.SelectedIndex = 0;
+            //从eng目录读取文件并载入listbox，默认选择第一个文件。
         }
 
         private void Mainfrm_FormClosed(object sender, FormClosedEventArgs e)
@@ -37,16 +38,16 @@ namespace pdx_ymlmerger
 
         private void MergeButton_Click(object sender, EventArgs e)
         {
-            string sourcefile, targetfile;
-            sourcefile = "eng\\" + FilesListbox.Text;
-            targetfile = "chn\\" + FilesListbox.Text;
+            string sourcefile = "eng\\" + FilesListbox.Text;
+            string targetfile = "chn\\" + FilesListbox.Text;
             MergeAlt(sourcefile, targetfile);
-
+            // 调用MergeAlt
         }
 
         private void Savebtn_Click(object sender, EventArgs e)
         {
             File.WriteAllLines("chn\\" + FilesListbox.Text, LinesOutput);
+            // 保存文件
         }
 
 
@@ -62,7 +63,10 @@ namespace pdx_ymlmerger
             }
             return retext;
         }
-        public string[] LinesOutput;
+        // 根据正则表达式读取":"前的变量名。
+
+        private string[] LinesOutput;
+        // 保存最终文本信息的全局变量，方便传递
 
         private void MergeAlt(string EngPath, string ChnPath)
         {
@@ -81,14 +85,17 @@ namespace pdx_ymlmerger
             List<string> listOutput = new List<string>(LinesEng);
 
             int insertedcount = 0,exceedcount=0;
-
             string engname = RexWords(listEng.ElementAt(0));
             string chnname = RexWords(listChn.ElementAt(0));
+            // 以上为各种初始化
 
+            // 以下for历遍英文变量
             for (int i = 0; i < listEng.Count; i++)
             {
                 engname = RexWords(listEng.ElementAt(i));
                 CatchChn = false;
+                
+                // 以下for将汉化过的文本当作词典，将汉化过的部分插入listOutput。
                 for (int k=0; k < listChn.Count; k++)
                 {
                     chnname = RexWords(listChn.ElementAt(k));
@@ -102,31 +109,41 @@ namespace pdx_ymlmerger
                         break;
                     }
                 }
+                
                 if (CatchChn == false)
                 {
                     Logtxtbox.AppendText(engname + " Inserted \r\n");
                     insertedcount ++;
                     Insertlineno += (i + 1).ToString() + ",";
                 }
+                // 如果未从汉化过的文本中找到该词，则将其记录为新加入的变量。
+
             }
-            //历遍英文，从中文查询并放入Output
+
+            // 将剩余的中文放入listOutput，并计数
             for (int i = 0; i < listChn.Count; i++)
             {
                 listOutput.Add(listChn.ElementAt(i));
                 exceedcount++;
             }
+
+
             Logtxtbox.AppendText("-------------------- \r\n");
             Logtxtbox.AppendText(insertedcount + "Lines Inserted \r\n");
             Logtxtbox.AppendText(exceedcount + "Lines Exceeded \r\n");
-            //将剩余中文放入Output
+            // 显示行增减
             
             if (Insertlineno != "") { listOutput.Add("#Added_Line_Nombers:0 \"" + Insertlineno + "\""); }
+            // 若有增加则末尾追加行号信息。
+
             LinesOutput = listOutput.ToArray();
+            // 将listOutput List<string> 转换为 string[]
+
             for (int i = 0; i < LinesOutput.Length; i++)
             {
                 Savetxtbox.AppendText(LinesOutput[i] + "\r\n");
             }
-           
+           // 预览要保存的文件
         }
     }
 }
