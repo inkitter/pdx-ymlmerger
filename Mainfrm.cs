@@ -46,7 +46,7 @@ namespace pdx_ymlmerger
 
         private void Savebtn_Click(object sender, EventArgs e)
         {
-            File.WriteAllLines("chn\\" + FilesListbox.Text, LinesOutput);
+            File.WriteAllLines("chn\\" + FilesListbox.Text, LinesOutput,Encoding.UTF8);
             // 保存文件
         }
 
@@ -77,7 +77,13 @@ namespace pdx_ymlmerger
             string Insertlineno = "";
 
             string[] LinesEng = File.ReadAllLines(EngPath);
-            if (!File.Exists(ChnPath)) { File.Create(ChnPath); }
+            if (!File.Exists(ChnPath))
+            {
+                FileStream fs = File.Create(ChnPath);
+                Byte[] info = new UTF8Encoding(true).GetBytes("l_english:");
+                fs.Write(info,0,info.Length);
+                fs.Close();
+            }
             string[] LinesChn = File.ReadAllLines(ChnPath);
 
             List<string> listEng = new List<string>(LinesEng);
