@@ -37,30 +37,31 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.CheckSameLinebtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnMerge
             // 
-            this.btnMerge.Location = new System.Drawing.Point(155, 351);
+            this.btnMerge.Location = new System.Drawing.Point(120, 496);
             this.btnMerge.Name = "btnMerge";
-            this.btnMerge.Size = new System.Drawing.Size(68, 34);
+            this.btnMerge.Size = new System.Drawing.Size(76, 34);
             this.btnMerge.TabIndex = 0;
-            this.btnMerge.Text = "Merge";
+            this.btnMerge.Text = "Merge Only";
             this.btnMerge.UseVisualStyleBackColor = true;
             this.btnMerge.Click += new System.EventHandler(this.MergeButton_Click);
             // 
             // Logtxtbox
             // 
-            this.Logtxtbox.Location = new System.Drawing.Point(264, 77);
+            this.Logtxtbox.Location = new System.Drawing.Point(205, 30);
             this.Logtxtbox.Multiline = true;
             this.Logtxtbox.Name = "Logtxtbox";
             this.Logtxtbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Logtxtbox.Size = new System.Drawing.Size(281, 275);
+            this.Logtxtbox.Size = new System.Drawing.Size(271, 460);
             this.Logtxtbox.TabIndex = 1;
             // 
             // Savebtn
             // 
-            this.Savebtn.Location = new System.Drawing.Point(793, 358);
+            this.Savebtn.Location = new System.Drawing.Point(731, 496);
             this.Savebtn.Name = "Savebtn";
             this.Savebtn.Size = new System.Drawing.Size(68, 34);
             this.Savebtn.TabIndex = 2;
@@ -70,11 +71,11 @@
             // 
             // Savetxtbox
             // 
-            this.Savetxtbox.Location = new System.Drawing.Point(580, 77);
+            this.Savetxtbox.Location = new System.Drawing.Point(482, 30);
             this.Savetxtbox.Multiline = true;
             this.Savetxtbox.Name = "Savetxtbox";
             this.Savetxtbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Savetxtbox.Size = new System.Drawing.Size(281, 275);
+            this.Savetxtbox.Size = new System.Drawing.Size(519, 460);
             this.Savetxtbox.TabIndex = 3;
             this.Savetxtbox.WordWrap = false;
             // 
@@ -82,15 +83,15 @@
             // 
             this.FilesListbox.FormattingEnabled = true;
             this.FilesListbox.ItemHeight = 12;
-            this.FilesListbox.Location = new System.Drawing.Point(39, 77);
+            this.FilesListbox.Location = new System.Drawing.Point(12, 30);
             this.FilesListbox.Name = "FilesListbox";
-            this.FilesListbox.Size = new System.Drawing.Size(184, 268);
+            this.FilesListbox.Size = new System.Drawing.Size(184, 460);
             this.FilesListbox.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 55);
+            this.label1.Location = new System.Drawing.Point(13, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 12);
             this.label1.TabIndex = 5;
@@ -99,7 +100,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(262, 55);
+            this.label2.Location = new System.Drawing.Point(203, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 12);
             this.label2.TabIndex = 6;
@@ -108,17 +109,28 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(578, 55);
+            this.label3.Location = new System.Drawing.Point(480, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 12);
             this.label3.TabIndex = 7;
             this.label3.Text = "Preview Save";
             // 
+            // CheckSameLinebtn
+            // 
+            this.CheckSameLinebtn.Location = new System.Drawing.Point(482, 496);
+            this.CheckSameLinebtn.Name = "CheckSameLinebtn";
+            this.CheckSameLinebtn.Size = new System.Drawing.Size(75, 34);
+            this.CheckSameLinebtn.TabIndex = 8;
+            this.CheckSameLinebtn.Text = "Check Same";
+            this.CheckSameLinebtn.UseVisualStyleBackColor = true;
+            this.CheckSameLinebtn.Click += new System.EventHandler(this.CheckSameLinebtn_Click);
+            // 
             // Mainfrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(871, 407);
+            this.ClientSize = new System.Drawing.Size(1006, 541);
+            this.Controls.Add(this.CheckSameLinebtn);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -127,8 +139,10 @@
             this.Controls.Add(this.Savebtn);
             this.Controls.Add(this.Logtxtbox);
             this.Controls.Add(this.btnMerge);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Mainfrm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PDX Game YML Merger";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Mainfrm_FormClosed);
             this.Load += new System.EventHandler(this.Mainfrm_Load);
@@ -147,6 +161,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button CheckSameLinebtn;
     }
 }
 

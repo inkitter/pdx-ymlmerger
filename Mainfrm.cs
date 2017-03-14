@@ -36,20 +36,23 @@ namespace pdx_ymlmerger
             Environment.Exit(0);
         }
 
+        List<string> listOutput;
+        List<string> listEng;
+        List<string> listChn;
+        string LoadedFileName = "";
+
         private void MergeButton_Click(object sender, EventArgs e)
         {
-            string sourcefile = "eng\\" + FilesListbox.Text;
-            string targetfile = "chn\\" + FilesListbox.Text;
-            MergeAlt(sourcefile, targetfile);
-            // 调用MergeAlt
+            ReadFile();
+            Merge();
+            Savetxtbox.AppendText(" ");
         }
 
         private void Savebtn_Click(object sender, EventArgs e)
         {
-            File.WriteAllLines("chn\\" + FilesListbox.Text, LinesOutput,Encoding.UTF8);
+            File.WriteAllLines("chn\\" + FilesListbox.Text, listOutput.ToArray(), Encoding.UTF8);
             // 保存文件
         }
-
 
         private string RexWords(string RegText)
         {
@@ -65,32 +68,37 @@ namespace pdx_ymlmerger
         }
         // 根据正则表达式读取":"前的变量名。
 
-        private string[] LinesOutput;
         // 保存最终文本信息的全局变量，方便传递
 
-        private void MergeAlt(string EngPath, string ChnPath)
+        private void ReadFile()
         {
-            string[] str = File.ReadAllLines(EngPath);
             Logtxtbox.Clear();
             Savetxtbox.Clear();
-            bool CatchChn = false;
-            string Insertlineno = "";
+            string EngPath = "eng\\" + FilesListbox.Text;
+            string ChnPath = "chn\\" + FilesListbox.Text;
 
-            string[] LinesEng = File.ReadAllLines(EngPath);
+            string[] str = File.ReadAllLines(EngPath);
             if (!File.Exists(ChnPath))
             {
                 FileStream fs = File.Create(ChnPath);
                 Byte[] info = new UTF8Encoding(true).GetBytes("l_english:");
-                fs.Write(info,0,info.Length);
+                fs.Write(info, 0, info.Length);
                 fs.Close();
             }
+            string[] LinesEng = File.ReadAllLines(EngPath);
             string[] LinesChn = File.ReadAllLines(ChnPath);
 
-            List<string> listEng = new List<string>(LinesEng);
-            List<string> listChn = new List<string>(LinesChn);
-            List<string> listOutput = new List<string>(LinesEng);
+            listEng = new List<string>(LinesEng);
+            listChn = new List<string>(LinesChn);
+            listOutput = new List<string>(LinesEng);
+            LoadedFileName = EngPath;
+        }
 
-            int insertedcount = 0,exceedcount=0;
+        private void Merge()
+        {
+            bool CatchChn = false;
+            string Insertlineno = "";
+            int insertedcount = 0, exceedcount = 0;
             string engname = RexWords(listEng.ElementAt(0));
             string chnname = RexWords(listChn.ElementAt(0));
             // 以上为各种初始化
@@ -123,7 +131,6 @@ namespace pdx_ymlmerger
                     Insertlineno += (i + 1).ToString() + ",";
                 }
                 // 如果未从汉化过的文本中找到该词，则将其记录为新加入的变量。
-
             }
 
             // 将剩余的中文放入listOutput，并计数
@@ -139,17 +146,39 @@ namespace pdx_ymlmerger
             Logtxtbox.AppendText(exceedcount + "Lines Exceeded \r\n");
             // 显示行增减
             
-            if (Insertlineno != "") { listOutput.Add("#Added_Line_Nombers:0 \"" + Insertlineno + "\""); }
+            if (Insertlineno != "") { listOutput.Add("#Added_Line_Nombers: " + Insertlineno ); }
             // 若有增加则末尾追加行号信息。
 
-            LinesOutput = listOutput.ToArray();
-            // 将listOutput List<string> 转换为 string[]
-
-            for (int i = 0; i < LinesOutput.Length; i++)
-            {
-                Savetxtbox.AppendText(LinesOutput[i] + "\r\n");
-            }
+            Savetxtbox.Text = string.Join("\r\n",listOutput);
            // 预览要保存的文件
+        }
+
+        private void CheckSameLinebtn_Click(object sender, EventArgs e)
+        {
+            string samelineno = "";
+            if (LoadedFileName != "eng\\" + FilesListbox.Text)
+            {
+                ReadFile();
+                Merge();
+            }
+
+            for (int i = 1; i < listEng.Count; i++)
+            {
+                if (listEng.ElementAt(i) == listOutput.ElementAt(i))
+                {
+                    samelineno += (i + 1).ToString() + ",";
+                }
+            }
+
+            if (samelineno != "")
+            {
+                listOutput.Add("#Same_as_Eng_LineNum: " + samelineno);
+                Savetxtbox.AppendText("\r\n#Same_as_Eng_LineNum: " + samelineno + "\r\n");
+            }
+            else
+            {
+                Savetxtbox.AppendText("\r\nNo Same lines.");
+            }
         }
     }
 }
