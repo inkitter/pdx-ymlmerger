@@ -2,6 +2,7 @@
 # Paradox Interactive YML Merger
 
 Github： https://github.com/inkitter/pdx-ymlmerger
+
 本程序配套Translator使用： https://github.com/inkitter/pdx-ymltranslator
 ### 准备
 
