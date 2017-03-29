@@ -1,8 +1,8 @@
 # P社翻译文件YML合并器（钢铁雄心4、群星）
 # Paradox Interactive YML Merger
 
-Github：[[https://github.com/inkitter/pdx-ymlmerger]]
-
+Github： https://github.com/inkitter/pdx-ymlmerger
+本程序配套Translator使用： https://github.com/inkitter/pdx-ymltranslator
 ### 准备
 
 0. 需要安装.NET Framework 4.5。
@@ -17,7 +17,7 @@ Github：[[https://github.com/inkitter/pdx-ymlmerger]]
 3. 点击 Save 按钮保存。
 4. 保存后的文件最后一行会有哪些行号的内容被改变了，帮助挑选新增未翻译的文本。翻译后手动删除即可。
 
-之后可使用YML文本翻译器进行翻译：[https://github.com/inkitter/pdx-ymlmerger]()。
+之后可使用YML文本翻译器进行翻译： https://github.com/inkitter/pdx-ymlmerger 。
 
 ### 已知bug
 0. 因为没有做异步和按钮失效，处理大文件时一定耐心等待，确定中间和右侧文本框都更新完成了再进行下一步操作。
