@@ -33,7 +33,7 @@
             this.Logtxtbox = new System.Windows.Forms.TextBox();
             this.Savebtn = new System.Windows.Forms.Button();
             this.Savetxtbox = new System.Windows.Forms.TextBox();
-            this.FilesListbox = new System.Windows.Forms.ListBox();
+            this.LstFiles = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -79,14 +79,14 @@
             this.Savetxtbox.TabIndex = 3;
             this.Savetxtbox.WordWrap = false;
             // 
-            // FilesListbox
+            // LstFiles
             // 
-            this.FilesListbox.FormattingEnabled = true;
-            this.FilesListbox.ItemHeight = 12;
-            this.FilesListbox.Location = new System.Drawing.Point(12, 30);
-            this.FilesListbox.Name = "FilesListbox";
-            this.FilesListbox.Size = new System.Drawing.Size(184, 460);
-            this.FilesListbox.TabIndex = 4;
+            this.LstFiles.FormattingEnabled = true;
+            this.LstFiles.ItemHeight = 12;
+            this.LstFiles.Location = new System.Drawing.Point(12, 30);
+            this.LstFiles.Name = "LstFiles";
+            this.LstFiles.Size = new System.Drawing.Size(184, 460);
+            this.LstFiles.TabIndex = 4;
             // 
             // label1
             // 
@@ -134,7 +134,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.FilesListbox);
+            this.Controls.Add(this.LstFiles);
             this.Controls.Add(this.Savetxtbox);
             this.Controls.Add(this.Savebtn);
             this.Controls.Add(this.Logtxtbox);
@@ -157,7 +157,7 @@
         private System.Windows.Forms.TextBox Logtxtbox;
         private System.Windows.Forms.Button Savebtn;
         private System.Windows.Forms.TextBox Savetxtbox;
-        private System.Windows.Forms.ListBox FilesListbox;
+        private System.Windows.Forms.ListBox LstFiles;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

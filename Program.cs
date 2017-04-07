@@ -22,4 +22,20 @@ namespace pdx_ymlmerger
             Application.Run(new Mainfrm());
         }
     }
+    public static class YMLTools
+    {
+        public static string FuncRegex(string RegText, string RegexRule)
+        {
+            Regex Reggetname = new Regex(RegexRule, RegexOptions.None);
+            StringBuilder returnString = new StringBuilder();
+            var matches = Reggetname.Matches(RegText);
+
+            foreach (var item in matches)
+            {
+                returnString.Append(item.ToString());
+            }
+            return returnString.ToString();
+        }
+        // 用于截取
+    }
 }
